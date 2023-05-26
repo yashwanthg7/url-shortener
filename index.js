@@ -7,6 +7,7 @@ const postUrl = require("./routes/postUrl");
 const getUrls = require("./routes/getUrls");
 require("dotenv/config");
 const mongoose = require("mongoose");
+const redirectSampleRouter = require("./routes/redirectSampleRoutes");
 
 app.use(express.json());
 app.get("/", (req, res) => {
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 app.use("/i", sampleRouter);
 app.use("/map", postUrl);
 app.use("/mappings", getUrls);
+app.use("/r", redirectSampleRouter);
 
 const startServer = async () => {
   try {
