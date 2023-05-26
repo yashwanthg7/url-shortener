@@ -11,7 +11,7 @@ const getGithubUrl = async (req, res) => {
 };
 
 const getEndpoints = async (req, res) => {
-  console.log(__dirname);
+  // console.log(__dirname);
   res.sendFile(path.join(__dirname, "..", "pages", "information.html"));
 };
 module.exports = {
