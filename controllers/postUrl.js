@@ -2,7 +2,7 @@ const Joi = require("joi");
 const { Url } = require("../models/Urls");
 
 const urlSchema = Joi.object({
-  url: Joi.string().required(),
+  url: Joi.string().uri().required(),
   alias: Joi.string().required().min(1),
 });
 const createAlias = async (req, res) => {
@@ -18,18 +18,19 @@ const createAlias = async (req, res) => {
     // console.log(checkUrl);
 
     if (checkUrl) {
-      return res.json({
-        error: "alias already exists! try another one :)",
+      return res.render('landingPage', {
+        aliasExistsError: "Alias already exists! Try another one :)",
+        shortenedURL: null,
       });
     }
 
     let createUrl = await Url.create(req.body);
-
-    res.json(createUrl);
+    res.render('landingPage', { shortenedURL: "https://url-shortener-rp1j.onrender.com/r/" + alias + "/" });
+    
   } catch (error) {
     console.log(error);
     res.json({
-      error: error,
+      error: error.details[0].message,
     });
   }
 };
