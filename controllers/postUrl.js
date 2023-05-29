@@ -25,7 +25,7 @@ const createAlias = async (req, res) => {
     }
 
     let createUrl = await Url.create(req.body);
-    res.render('landingPage', { shortenedURL: "https://url-shortener-rp1j.onrender.com/r/" + alias + "/" });
+    res.render('landingPage', { shortenedURL: "https://url-shortener-rp1j.onrender.com/r/" + createUrl.alias + "/" });
     
   } catch (error) {
     console.log(error);
