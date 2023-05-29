@@ -8,17 +8,26 @@ const getUrls = require("./routes/getUrls");
 require("dotenv/config");
 const mongoose = require("mongoose");
 const redirectSampleRouter = require("./routes/redirectSampleRoutes");
+const shortenUrl = require("./routes/shortenUrl.js")
 
 app.use(express.json());
-app.get("/", (req, res) => {
-  res.send("Welcome to the URL Shortener!");
-});
+app.set('view engine', 'ejs');
+app.set('views', './views'); 
 
+app.use(express.urlencoded({ extended: true }));
+
+
+app.get('/', (req, res) => {
+  const shortenedURL = '';
+  const aliasExistsError = "";
+  res.render('landingPage',{ shortenedURL, aliasExistsError });
+});
 // step2
 app.use("/i", sampleRouter);
 app.use("/map", postUrl);
 app.use("/mappings", getUrls);
 app.use("/r", redirectSampleRouter);
+app.use("/shorten",shortenUrl)
 
 const startServer = async () => {
   try {
