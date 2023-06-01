@@ -15,7 +15,6 @@ const createAlias = async (req, res) => {
     }
 
     let checkUrl = await Url.findOne({ alias: req.body.alias });
-    // console.log(checkUrl);
 
     if (checkUrl) {
       return res.render('landingPage', {
